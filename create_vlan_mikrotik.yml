@@ -1,11 +1,4 @@
 ---
-- vlans:
-    - name: nhansu
-      vlan_id: 110
-      interface: ether4
-    - name: intern
-      vlan_id: 111
-      interface: ether5
 - name: create vlan
   hosts: all
   gather_facts: no
@@ -13,12 +6,13 @@
     - name: create vlans
       routeros_command:
         commands:
-         - /interface vlan add comment="To {{item.name}}" name="VLAN{{ item.vlan_id }}" interface="{{ item.interface }}" vlan-id="{{item.vlan_id}}"
+         - /interface vlan add name="VLAN110" interface="ether5" vlan-id=110
+        # - /interface vlan add comment="To {{item.name}}" name="VLAN{{ item.vlan_id }}" interface="{{ item.interface }}" vlan-id="{{item.vlan_id}}"
         #- /interface vlan add name="VLAN{{ item.vlan_id }}" interface="{{ item.interface }}" vlan-id="{{item.vlan_id}}"    
-      when:
-        - vlans is define
-      loop: "{{ vlans }}"
-      tags:
-        - vlans:
+      # when:
+      #   - vlans is define
+      # loop: "{{ vlans }}"
+      # tags:
+      #   - vlans:
 
 
