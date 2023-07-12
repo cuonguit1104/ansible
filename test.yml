@@ -1,3 +1,10 @@
 ---
 - name: show info
   hosts: all 
+  gather_facts: no
+
+  tasks:
+    - name: show info
+      routeros_command: 
+        commands:
+        - /ip route print
