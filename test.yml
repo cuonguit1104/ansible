@@ -1,10 +1,12 @@
 ---
-- name: show info
-  hosts: all 
+- name: Show version
+  hosts: all
   gather_facts: no
-
+  
   tasks:
-    - name: show info
-      routeros_command: 
-        commands:
-        - /ip route print
+    - name: Show version
+      routeros_command:
+        commands: \show version
+      register: result
+    - fail: msg="can update version"
+      when: "not ('Version 6.44.1' in result.stdout[0])"
