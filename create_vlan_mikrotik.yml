@@ -2,7 +2,7 @@
 - name: create vlan
   hosts: all
   gather_facts: no
-  vlans:
+  vlan:
     - name: nhansu
       vlan_id: 110
       interface: ether4
@@ -19,6 +19,6 @@
         - vlans is define
       loop: "{{ vlans }}"
       tags:
-        - vlans:
+        - vlan:
 
 
