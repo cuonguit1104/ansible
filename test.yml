@@ -1,12 +1,16 @@
 ---
-- name: Show version
+- name: Show MikroTik router IP
   hosts: all
   gather_facts: no
-  
+
   tasks:
-    - name: Show version
+    - name: Fetch router IP address
       routeros_command:
-        commands: \show version
-      register: result
-    - fail: msg="can update version"
-      when: "not ('Version 6.44.1' in result.stdout[0])"
+        commands:
+          - "/ip address print"
+      register: router_output
+
+    - name: Display router IP
+      debug:
+        msg: "{{ item }}"
+      loop: "{{ router_output['stdout_lines'][0] }}"
