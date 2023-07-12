@@ -15,7 +15,7 @@
     - name: create vlans
       routeros_command:
         commands:
-        - /interface vlan add name=VLAN104 interface=ethernet2 vlan-id=104    
+        - /interface vlan add name="VLAN104" interface="ether2" vlan-id=104    
       # when:
       #   - vlans is define
       # loop: "{{ vlans }}"
