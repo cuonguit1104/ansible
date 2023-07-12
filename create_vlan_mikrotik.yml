@@ -2,24 +2,23 @@
 - name: create vlan
   hosts: all
   gather_facts: no
-  # vars:
-  #   vlans:
-  #     - name: nhansu
-  #       vlan_id: 104
-  #       interface: ether2
-  #     - name: intern
-  #       vlan_id: 105
-  #       interface: ether3
+  vlans:
+    - name: nhansu
+      vlan_id: 110
+      interface: ether4
+    - name: intern
+      vlan_id: 111
+      interface: ether5
 
   tasks: 
     - name: create vlans
       routeros_command:
         commands:
-        - /interface vlan add name="VLAN104" interface="ether2" vlan-id=104    
-      # when:
-      #   - vlans is define
-      # loop: "{{ vlans }}"
-      # tags:
-      #   - vlans:
+        - /interface vlan add name="VLAN{{ item.vlan_id }}" interface="{{ item.interface }}" comment="To {{item.name}}" vlan-id="{{item.vlan_id}}"  
+      when:
+        - vlans is define
+      loop: "{{ vlans }}"
+      tags:
+        - vlans:
 
 
