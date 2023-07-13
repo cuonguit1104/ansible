@@ -1,0 +1,20 @@
+---
+- name: Show MikroTik router IP
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: Remove static route 192.168.5.0
+      routeros_command:
+        commands:
+          - /ip route remove [find where dst-address="192.168.5.0/24" and gateway="192.168.13.1"]
+   
+    - name: Show IP route table
+      routeros_command:
+        commands:
+          - /ip route print
+      register: ip_route_table  
+
+    - name: Display route table
+      debug:
+        msg: "{{ item }}"
+      loop: "{{ ip_route_table['stdout_lines'][0] }}"       
