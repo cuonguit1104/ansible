@@ -3,18 +3,18 @@
   hosts: all
   gather_facts: no
   tasks: 
-    # - name: Turn_off_ether10
-    #   routeros_command:
-    #     commands:
-    #       - /interface ethernet disable ether10
-
-    - name: show_interface_on
+    - name: Turn_off_ether3
       routeros_command:
         commands:
-          - /interface print
+          - /interface ethernet disable ether3
+
+    - name: show_interface_disable
+      routeros_command:
+        commands:
+          - /interface print where disabled
       register: interface_output
 
-    - name: display_interface_on
+    - name: display_interface_disable
       debug: 
         msg: "{{ item }}" 
       loop: "{{ interface_output['stdout_lines'][0] }}"    
