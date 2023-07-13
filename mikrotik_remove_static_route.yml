@@ -3,10 +3,10 @@
   hosts: all
   gather_facts: no
   tasks:
-    - name: Remove static route 192.168.5.0
+    - name: Remove static route 192.168.6.0
       routeros_command:
         commands:
-          - /ip route remove [find where dst-address="192.168.5.0/24" and gateway="192.168.13.1"]
+          - /ip route remove [find where dst-address="192.168.6.0/24" and gateway="192.168.13.1"]
    
     - name: Show IP route table
       routeros_command:
