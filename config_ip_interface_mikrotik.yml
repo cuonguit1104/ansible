@@ -4,23 +4,23 @@
   gather_facts: no
   
   tasks: 
-  - name: Configure_IP_ether3
-     routeros_command:
+    - name: Configure_IP_ether3
+      routeros_command:
         commands:
-          - /ip address add address=192.168.13.1 interface=ether3
+          - /ip address add interface=ether3 address=192.168.13.1 
 
-  - name: Configure_IP_ether4
-     routeros_command:
-      commands:
-          - /ip address add address=192.168.14.1 interface=ether4
+    - name: Configure_IP_ether4
+      routeros_command:
+        commands:
+          - /ip address add interface=ether4 address=192.168.14.1 
 
-  - name: show_ip_interface
-     routeros_command:
+    - name: show_ip_interface
+      routeros_command:
         commands:
           - /ip address print     
-    register: IP_table
+      register: IP_table
 
-  - name: Display router IP
+    - name: Display router IP
       debug:
         msg: "{{ item }}"
       loop: "{{ IP_table['stdout_lines'][0] }}"
