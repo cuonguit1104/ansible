@@ -1,0 +1,23 @@
+---
+- name: Configure_IP_interface
+  hosts: all
+  gather_facts: no
+  
+  tasks: 
+  - name: Configure_IP
+     routeros_command:
+        commands:
+          - /ip address add address=192.168.13.1 interface=ether3
+        commands:
+          - /ip address add address=192.168.14.1 interface=ether4
+
+  - name: show_ip_interface
+     routeros_command:
+        commands:
+          - /ip address print     
+    register: IP_table
+    
+  - name: Display router IP
+      debug:
+        msg: "{{ item }}"
+      loop: "{{ IP_table['stdout_lines'][0] }}"
