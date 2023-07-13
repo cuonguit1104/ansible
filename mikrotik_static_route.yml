@@ -7,7 +7,7 @@
     - name: Static route
       routeros_command:
         commands:
-          - /ip route add dst-address=192.168.5.0/24 gateway=192.168.13.1
+          - /ip route add dst-address=192.168.6.0/24 gateway=192.168.13.1
 
     - name: Show IP route table
       routeros_command:
