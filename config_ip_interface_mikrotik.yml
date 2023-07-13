@@ -4,11 +4,14 @@
   gather_facts: no
   
   tasks: 
-  - name: Configure_IP
+  - name: Configure_IP_ether3
      routeros_command:
         commands:
           - /ip address add address=192.168.13.1 interface=ether3
-        commands:
+
+  - name: Configure_IP_ether4
+     routeros_command:
+      commands:
           - /ip address add address=192.168.14.1 interface=ether4
 
   - name: show_ip_interface
@@ -16,7 +19,7 @@
         commands:
           - /ip address print     
     register: IP_table
-    
+
   - name: Display router IP
       debug:
         msg: "{{ item }}"
