@@ -1,0 +1,20 @@
+- name: Delete IP Address Interface Mikrorik
+  hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: Remove IP Address in interface ether4
+      routeros_command:
+        commands:
+         - /ip address remove [find where address="192.168.14.1/24" and interface="ether4"]
+         
+    - name: show_ip_interface
+      routeros_command:
+        commands:
+          - /ip address print     
+      register: IP_table
+
+    - name: Display router IP
+      debug:
+        msg: "{{ item }}"
+      loop: "{{ IP_table['stdout_lines'][0] }}"     
