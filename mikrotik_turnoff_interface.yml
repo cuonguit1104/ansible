@@ -6,4 +6,4 @@
     - name: Turn_off_ether10
       routeros_command:
         commands:
-          - /interface ethernet disable ether10
+          - /interface ethernet enable ether10
