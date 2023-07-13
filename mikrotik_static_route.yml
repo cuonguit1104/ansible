@@ -1,0 +1,21 @@
+---
+- name: Show MikroTik router IP
+  hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: Static route
+      routeros_command:
+        commands:
+          - /ip route add dst-address=192.168.2.0/24 gateway=192.168.13.1
+
+    - name: Show IP route table
+      routeros_command:
+        commands:
+          - /ip route print
+      register: ip_route_table  
+
+    - name: Display route table
+      debug:
+        msg: "{{ item }}"
+      loop: "{{ ip_route_table['stdout_lines'][0] }}"   
